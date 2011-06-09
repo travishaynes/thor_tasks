@@ -1,1 +1,8 @@
-#TODO: Write a readme file
+== Installation
+
+Add the line:
+  gem 'thor_tasks'
+to your Gemfile, then run
+  bundle
+and
+  rails g thor_tasks:install
