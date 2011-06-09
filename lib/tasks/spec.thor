@@ -65,10 +65,18 @@ class Spec < Thor
       return
     end
     
+    lastType = ""
+    currentType = ""
     Dir["spec/#{name}/*_spec.rb"].each do |f|
-      f = f.split("_")[0]
-      f = name == "*" ? f.partition("/")[2] : f.gsub("spec/#{name}/", "")
-      puts "  #{f}"
+      spec = File.basename(f, "_spec.rb")
+      dir = File.dirname(f).split("/")
+      currentType = dir[dir.length-1]
+      spec = spec.rpartition("_")[0] if ['controllers', 'helpers', 'routing'].include? currentType
+      if currentType != lastType
+        print "\n\x1b[38;5;10m#{currentType}\x1b[0m\n"
+        lastType = currentType
+      end
+      puts "  #{spec}"
     end
   end
 end

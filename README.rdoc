@@ -37,12 +37,9 @@ The following tasks are helpers for running your RSpecs:
 
 Running any spec task without any options will run all the specs for that
 category, with the exception of the list spec, which will list all the available
-spec files.
-
-For the spec:view task, you can specify a controller, and an action. If you just
-specify a controller, all the actions for that view will run.
-
-You can run thor spec:list --help to list all the available types.
+spec files. For the spec:view task, you can specify a controller, and an action.
+If you specify a controller without an action, all the actions for that view
+will run.
 
 Running any spec with the option --bundle or -b will execute that task using
 bundle exec.
