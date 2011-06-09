@@ -45,3 +45,13 @@ To run your specs with `bundle exec', use the bundle option. For example:
   thor spec:all --bundle
 or, you can use the abbreviated option:
   thor spec:all -b
+  
+== Mongo tasks
+
+These tasks allow you to start, stop, and restart MongoDB as a background
+process on a Linux box. It might work on OS X, but hasn't been tested, yet.
+
+The tasks are:
+  thor mongo:start
+  thor mongo:restart
+  thor mongo:stop
