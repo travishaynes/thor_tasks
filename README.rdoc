@@ -1,8 +1,7 @@
 == Installation
 
-Add the line:
+Add the gem to your Gemfile:
   gem 'thor_tasks'
-to your Gemfile, then run
+Run bundle, and install the tasks into your app:
   bundle
-and
   rails g thor_tasks:install

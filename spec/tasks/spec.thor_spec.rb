@@ -7,4 +7,5 @@ describe Spec do
   it { should respond_to :request }
   it { should respond_to :routing }
   it { should respond_to :view }
+  it { should respond_to :list }
 end

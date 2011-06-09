@@ -30,4 +30,26 @@ class Spec < Thor
   def view(controller = "*", action = "*")
     run "rspec spec/views/#{controller}/#{action}*_spec.rb"
   end
+  
+  desc "list [TYPE}]", "lists specs for TYPE, see thor spec:list --help for more info."
+  method_options :help => false
+  def list(name = "*")
+    available_types = [
+      'controllers', 'helpers', 'models', 'requests', 'routing', 'views'
+    ]
+    if options[:help]
+      puts "Available types for thor spec:list are"
+      available_types.each do |t|
+        puts "  #{t}"
+      end
+      puts "Running thor spec:list without specifying a type will list all specs from all types."
+      return
+    end
+    
+    Dir["spec/#{name}/*_spec.rb"].each do |f|
+      f = f.split("_")[0]
+      f = name == "*" ? f.partition("/")[2] : f.gsub("spec/#{name}/", "")
+      puts "  #{f}"
+    end
+  end
 end
