@@ -5,3 +5,44 @@ Add the gem to your Gemfile:
 Run bundle, and install the tasks into your app:
   bundle
   rails g thor_tasks:install
+You can see a list of all the available tasks by running:
+  thor list
+  
+== Spork tasks
+
+These tasks allow you to start, stop, and restart Spork as a background process
+from a Bash console.
+
+The tasks are:
+  thor spork:start
+  thor spork:restart
+  thor spork:stop
+
+Since spork is being forked as a background process, once you start it, it will
+take some time to load. During the time that Spork is loading, it will output
+some text to the terminal. It's best just to wait until it's completely loaded
+to continue.
+
+== Spec tasks
+
+The following tasks are helpers for running your RSpecs:
+  thor spec:all
+  thor spec:controller [NAME]
+  thor spec:helper [NAME]
+  thor spec:model [NAME]
+  thor spec:request [NAME]
+  thor spec:routing [NAME]
+  thor spec:view [CONTROLLER] [ACTION]
+  thor spec:list [TYPE]
+
+Running any spec task without any options will run all the specs for that
+category, with the exception of the list spec, which will list all the available
+spec files.
+
+For the spec:view task, you can specify a controller, and an action. If you just
+specify a controller, all the actions for that view will run.
+
+You can run thor spec:list --help to list all the available types.
+
+Running any spec with the option --bundle or -b will execute that task using
+bundle exec.

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Spec do
+  it { should respond_to :all }
   it { should respond_to :controller }
   it { should respond_to :helper }
   it { should respond_to :model }

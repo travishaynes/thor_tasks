@@ -1,34 +1,53 @@
 class Spec < Thor
   include Thor::Actions
   
+  desc "all", "runs all your specs"
+  method_option :bundle, :type => :boolean, :aliases => "-b"
+  def all
+    b = options[:bundle] ? "bundle exec" : ""
+    run "rspec spec"
+  end
+  
   desc "controller [NAME]", "runs rspec for controllers"
+  method_option :bundle, :type => :boolean, :aliases => "-b"
   def controller(name="*")
-    run "rspec spec/controllers/#{name}_controller_spec.rb"
+    b = options[:bundle] ? "bundle exec" : ""
+    run "#{b} rspec spec/controllers/#{name}_controller_spec.rb"
   end
   
   desc "helper [NAME]", "runs rspec for helpers"
+  method_option :bundle, :type => :boolean, :aliases => "-b"
   def helper(name = "*")
-    run "rspec spec/helpers/#{name}_helper_spec.rb"
+    b = options[:bundle] ? "bundle exec" : ""
+    run "#{b} rspec spec/helpers/#{name}_helper_spec.rb"
   end
 
   desc "model [NAME]", "runs rspec for models"
+  method_option :bundle, :type => :boolean, :aliases => "-b"
   def model(name = "*")
-    run "rspec spec/models/#{name}_spec.rb"
+    b = options[:bundle] ? "bundle exec" : ""
+    run "#{b} rspec spec/models/#{name}_spec.rb"
   end
   
   desc "request [NAME]", "runs rspec for requests"
+  method_option :bundle, :type => :boolean, :aliases => "-b"
   def request(name = "*")
-    run "rspec spec/requests/#{name}_spec.rb"
+    b = options[:bundle] ? "bundle exec" : ""
+    run "#{b} rspec spec/requests/#{name}_spec.rb"
   end
   
   desc "routing [NAME]", "runs rspec for routing"
+  method_option :bundle, :type => :boolean, :aliases => "-b"
   def routing(name = "*")
-    run "rspec spec/routing/#{name}_spec.rb"
+    b = options[:bundle] ? "bundle exec" : ""
+    run "#{b} rspec spec/routing/#{name}_spec.rb"
   end
   
   desc "view [CONTROLLER] [ACTION]", "runs rspec for views"
+  method_option :bundle, :type => :boolean, :aliases => "-b"
   def view(controller = "*", action = "*")
-    run "rspec spec/views/#{controller}/#{action}*_spec.rb"
+    b = options[:bundle] ? "bundle exec" : ""
+    run "#{b} rspec spec/views/#{controller}/#{action}*_spec.rb"
   end
   
   desc "list [TYPE}]", "lists specs for TYPE, see thor spec:list --help for more info."
