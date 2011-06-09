@@ -41,5 +41,7 @@ spec files. For the spec:view task, you can specify a controller, and an action.
 If you specify a controller without an action, all the actions for that view
 will run.
 
-Running any spec with the option --bundle or -b will execute that task using
-bundle exec.
+To run your specs with `bundle exec', use the bundle option. For example:
+  thor spec:all --bundle
+or, you can use the abbreviated option:
+  thor spec:all -b
