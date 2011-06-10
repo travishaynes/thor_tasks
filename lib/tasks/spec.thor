@@ -1,6 +1,8 @@
 class Spec < Thor
   include Thor::Actions
   
+  AVAILABLE_TYPES = ['controllers', 'helpers', 'models', 'requests', 'routing', 'views']
+
   desc "all", "runs all your specs"
   method_option :bundle, :type => :boolean, :aliases => "-b"
   def all
@@ -53,30 +55,29 @@ class Spec < Thor
   desc "list [TYPE}]", "lists specs for TYPE, see thor spec:list --help for more info."
   method_options :help => false
   def list(name = "*")
-    available_types = [
-      'controllers', 'helpers', 'models', 'requests', 'routing', 'views'
-    ]
     if options[:help]
       puts "Available types for thor spec:list are"
-      available_types.each do |t|
+      AVAILABLE_TYPES.each do |t|
         puts "  #{t}"
       end
       puts "Running thor spec:list without specifying a type will list all specs from all types."
       return
     end
     
-    lastType = ""
-    currentType = ""
-    Dir["spec/#{name}/*_spec.rb"].each do |f|
-      spec = File.basename(f, "_spec.rb")
-      dir = File.dirname(f).split("/")
-      currentType = dir[dir.length-1]
-      spec = spec.rpartition("_")[0] if ['controllers', 'helpers', 'routing'].include? currentType
-      if currentType != lastType
-        print "\n\x1b[38;5;10m#{currentType}\x1b[0m\n"
-        lastType = currentType
+    paths = Dir["spec/#{name}/**/"].sort.reject { |p| p if !AVAILABLE_TYPES.include?(p.split("/")[1]) }
+    paths.each do |p|
+      path = p.split("/")
+      l = path.length
+      # the following prints an indented path in a color that is relative to the
+      # levels of indentation
+      print "#{'  ' * (l-2)}\x1b[38;5;1#{l-1}m#{path[l-1]}\x1b[0m\n"
+      files = Dir["#{p}*_spec.rb"].sort
+      files.each do |f|
+        spec = File.basename(f, "_spec.rb")
+        spec = spec.rpartition("_")[0] if ['controllers', 'helpers', 'routing'].include? path[1]
+        print "#{'  ' * (l-1)}#{spec}\n" # prints the spec with indentation
       end
-      puts "  #{spec}"
+      print "\n" unless files.length == 0
     end
   end
 end
