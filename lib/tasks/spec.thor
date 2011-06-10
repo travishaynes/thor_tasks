@@ -40,7 +40,7 @@ class Spec < Thor
   method_option :bundle, :type => :boolean, :aliases => "-b"
   def routing(name = "*")
     b = options[:bundle] ? "bundle exec" : ""
-    run "#{b} rspec spec/routing/#{name}_spec.rb"
+    run "#{b} rspec spec/routing/#{name}_routing_spec.rb"
   end
   
   desc "view [CONTROLLER] [ACTION]", "runs rspec for views"
