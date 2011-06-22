@@ -1,11 +1,16 @@
 class Mongo < Thor
   include Thor::Actions
   
-  desc "start", "starts mongodb"
+  DEFAULT_DB_PATH = "/var/lib/mongodb"
+  DEFAULT_LOG_PATH = "/var/log/mongodb.log"
+  
+  desc "start [DBPATH] [LOGPATH]", "starts mongodb"
+  method_option :dbpath, :type => :string, :default => DEFAULT_DB_PATH
+  method_option :logpath, :type => :string, :default => DEFAULT_LOG_PATH
   def start
     if mongod_pid.nil?
       puts "Starting MongoDB . . ."
-      run 'sudo mongod --dbpath /var/lib/mongodb --fork --logpath /var/log/mongodb.log --logappend'
+      run "sudo mongod --dbpath #{options[:dbpath]} --fork --logpath #{options[:logpath]} --logappend"
     else
       puts "MongoDB is already running!"
     end
@@ -28,6 +33,12 @@ class Mongo < Thor
     invoke :stop
     sleep(0.5) # allow a little time for process to end
     invoke :start
+  end
+  
+  desc "repair [DBPATH]", "runs a repair on all databases"
+  method_option :dbpath, :type => :string, :default => DEFAULT_DB_PATH
+  def repair
+    run "sudo mongod --dbpath #{options[:dbpath]} --repair"
   end
   
   private
