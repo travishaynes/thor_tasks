@@ -1,5 +1,7 @@
 == Installation
 
+=== Install in a Rails app
+
 Add the gem to your Gemfile:
   gem 'thor_tasks'
 Run bundle, and install the tasks into your app:
@@ -7,7 +9,15 @@ Run bundle, and install the tasks into your app:
   rails g thor_tasks:install
 You can see a list of all the available tasks by running:
   thor list
-  
+
+=== Install system-wide
+
+Clone the repository and install them using `thor install'
+  git clone git://github.com/travishaynes/thor_tasks.git thor_tasks
+  thor install thor_tasks/lib/tasks/mongo.thor
+  thor install thor_tasks/lib/tasks/spec.thor
+  thor install thor_tasks/lib/tasks/spork.thor
+
 == Spork tasks
 
 These tasks allow you to start, stop, and restart Spork as a background process
@@ -49,9 +59,10 @@ or, you can use the abbreviated option:
 == Mongo tasks
 
 These tasks allow you to start, stop, and restart MongoDB as a background
-process on a Linux box. It might work on OS X, but hasn't been tested, yet.
+process, and repair all Mongo databases.
 
 The tasks are:
+  thor mongo:repair
   thor mongo:start
   thor mongo:restart
   thor mongo:stop
