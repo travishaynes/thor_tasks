@@ -1,7 +1,20 @@
 class Spec < Thor
   include Thor::Actions
   
-  AVAILABLE_TYPES = ['controllers', 'helpers', 'models', 'requests', 'routing', 'views']
+  map "a" => :all,
+      "c" => :controller,
+      "h" => :helper,
+      "l" => :list,
+      "m" => :model,
+      "t" => :request,
+      "r" => :routing,
+      "v" => :view
+  
+  no_tasks do
+    def available_types
+      ['controllers', 'helpers', 'models', 'requests', 'routing', 'views']
+    end
+  end
 
   desc "all", "runs all your specs"
   method_option :bundle, :type => :boolean, :aliases => "-b"
@@ -57,14 +70,14 @@ class Spec < Thor
   def list(name = "*")
     if options[:help]
       puts "Available types for thor spec:list are"
-      AVAILABLE_TYPES.each do |t|
+      available_types.each do |t|
         puts "  #{t}"
       end
       puts "Running thor spec:list without specifying a type will list all specs from all types."
       return
     end
     
-    paths = Dir["spec/#{name}/**/"].sort.reject { |p| p if !AVAILABLE_TYPES.include?(p.split("/")[1]) }
+    paths = Dir["spec/#{name}/**/"].sort.reject { |p| p if !available_types.include?(p.split("/")[1]) }
     paths.each do |p|
       path = p.split("/")
       l = path.length

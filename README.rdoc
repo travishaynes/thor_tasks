@@ -45,6 +45,16 @@ The following tasks are helpers for running your RSpecs:
   thor spec:view [CONTROLLER] [ACTION]
   thor spec:list [TYPE]
 
+You can also use these aliases:
+  thor spec:a # => thor spec:all
+  thor spec:c # => thor spec:controlleer
+  thor spec:h # => thor spec:helper
+  thor spec:m # => thor spec:model
+  thor spec:t # => thor spec:request
+  thor spec:r # => thor spec:routing
+  thor spec:v # => thor spec:view
+  thor spec:l # => thor spec:list
+
 Running any spec task without any options will run all the specs for that
 category, with the exception of the list spec, which will list all the available
 spec files. For the spec:view task, you can specify a controller, and an action.
