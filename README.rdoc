@@ -83,13 +83,14 @@ These tasks are helpers for apt-cache in Linux.
 
 === apt:search
 
+Pretty-prints the output from apt-cache search.
+
   thor apt:search "terms" # or thor apt:s
 
-Pretty-prints the output from apt-cache search. 
-
 === apt:show
+
+Cleans up the output from apt-cache show.
 
   thor apt:show "package" # or thor apt:w
   thor apt:show "package --desc # to only show the description
 
-Cleans up the output from apt-cache show.

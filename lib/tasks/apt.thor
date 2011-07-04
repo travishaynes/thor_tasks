@@ -71,9 +71,9 @@ class Apt < Thor
     print params["Description"].foreground(:green).bright.underline + "\n\n"
     
     # print the long description
-    print desc.foreground(:white).bright + "\n\n"
+    print desc.foreground(:white).bright + "\n\n" unless desc.nil?
     # print the footnote
-    print ftn.foreground(:blue) + "\n\n"
+    print ftn.foreground(:blue) + "\n\n" unless ftn.nil?
     
     # ommit the details if we only want the description
     unless options[:desc]
