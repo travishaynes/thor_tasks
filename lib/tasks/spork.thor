@@ -3,12 +3,12 @@ class Spork < Thor
   
   desc "start", "starts Spork in the background"
   def start
-    run "(bundle exec spork &)"
+    run "(bundle exec spork rspec &)"
   end
   
   desc "stop", "stops Spork"
   def stop
-    Process.kill(:TERM, `ps -ef | grep spork | grep -v grep | awk '{ print $2 }'`.to_i)
+    Process.kill(:TERM, `ps -ef | grep "spork rspec" | grep -v grep | awk '{ print $2 }'`.to_i)
   end
   
   desc "restart", "restarts Spork"
